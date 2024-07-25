@@ -1,0 +1,43 @@
+public function index()
+  {
+      $response = Jenis_Rekening_Model::all();
+      return response()->json(['data' => $response]);
+  }
+
+  public function store(Request $request)
+  {
+      $data = $request->all();
+      $rekening = Jenis_Rekening_Model::create($data);
+  
+      return response()->json(['message' => 'success']);
+  }
+
+  public function show($id)
+  {
+      $data = Jenis_Rekening_Model::findOrFail($id);
+      return response()->json(['message' => 'success', 'data' => $data]);
+  }
+
+  public function edit($id)
+  {
+      $data = Jenis_Rekening_Model::findOrFail($id);
+      return response()->json(['message' => 'success', 'data' => $data]);
+  }
+
+  public function update(Request $request, $id)
+  {
+      $data = $request->all();
+      $rekening = Jenis_Rekening_Model::findOrFail($id);
+      $rekening->update($data);
+
+      return response()->json(['message' => 'success', 'data' => $rekening]);
+  }
+
+  public function destroy($id)
+  {
+      $rekening = Jenis_Rekening_Model::findOrFail($id);
+      $rekening->delete();
+
+      return response()->json(['message' => 'success']);
+  }
+  
