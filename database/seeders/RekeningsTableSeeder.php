@@ -31,33 +31,33 @@ class RekeningsTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'name' => 'Mandiri',
-                'saldo' => '0',
+                'saldo' => '21',
                 'created_at' => '2024-07-21 06:51:40',
-                'updated_at' => '2024-07-21 06:51:40',
+                'updated_at' => '2024-07-23 08:50:20',
             ),
             2 => 
             array (
                 'id' => 3,
                 'name' => 'BRI',
-                'saldo' => '24075000',
+                'saldo' => '30765000',
                 'created_at' => '2024-07-21 06:51:47',
-                'updated_at' => '2024-07-23 08:43:21',
+                'updated_at' => '2024-07-25 14:32:34',
             ),
             3 => 
             array (
                 'id' => 4,
                 'name' => 'Dana',
-                'saldo' => '0',
+                'saldo' => '21',
                 'created_at' => '2024-07-21 06:51:52',
-                'updated_at' => '2024-07-21 06:51:52',
+                'updated_at' => '2024-07-23 08:51:20',
             ),
             4 => 
             array (
                 'id' => 5,
                 'name' => 'Cash',
-                'saldo' => '-20000',
+                'saldo' => '80000',
                 'created_at' => '2024-07-21 06:51:59',
-                'updated_at' => '2024-07-23 08:28:51',
+                'updated_at' => '2024-07-23 08:55:52',
             ),
         ));
         

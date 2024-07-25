@@ -45,7 +45,7 @@
     </ol>
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Form Pengeluaran <small>header small text goes here...</small></h1>
+    <h1 class="page-header">Form {{ $title }} <small>header small text goes here...</small></h1>
     <!-- END page-header -->
     <!-- BEGIN row -->
     <div class="row">
@@ -70,8 +70,8 @@
                 <!-- END panel-heading -->
                 <!-- BEGIN panel-body -->
                 <div class="panel-body p-0">
-                    <form class="form-horizontal form-bordered" action="{{ route('pemasukan.store') }}" method="post"
-                        enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ route('pemindahan-saldo.store') }}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label class="form-label col-form-label col-lg-4">Inline Datepicker</label>
@@ -85,9 +85,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="form-label col-form-label col-lg-4">Rekening</label>
+                            <label class="form-label col-form-label col-lg-4">Rekening Awal</label>
                             <div class="col-lg-8">
-                                <select class="form-select" name="rekening_id" aria-label="Default select example" required>
+                                <select class="form-select" name="rekening_awal_id" aria-label="Default select example"
+                                    required>
                                     <option selected disabled> -- pilih -- </option>
                                     @foreach ($rekening as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -97,14 +98,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="form-label col-form-label col-lg-4">Sumber Pemasukan</label>
+                            <label class="form-label col-form-label col-lg-4">Rekening Tujuan</label>
                             <div class="col-lg-8">
-                                <select class="form-select" name="sumber_pemasukan_id" aria-label="Default select example"
+                                <select class="form-select" name="rekening_tujuan_id" aria-label="Default select example"
                                     required>
                                     <option selected disabled> -- pilih -- </option>
-                                    @foreach ($sumber as $item)
+                                    @foreach ($rekening as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -116,7 +118,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-4 mb-4">
-                            <input type="hidden" name="transaksi_id" value="2">
+                            <input type="hidden" name="transaksi_id" value="3">
                             <a href="{{ route('pemasukan.index') }}" class="btn btn-warning">Kembali</a>
                             <button type="submit" class="btn btn-primary">simpan</button>
                         </div>

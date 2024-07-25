@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\UsersTableSeeder;
+use Database\Seeders\GaleriesTableSeeder;
 use Database\Seeders\KegiatansTableSeeder;
 use Database\Seeders\RekeningsTableSeeder;
 use Database\Seeders\KebutuhansTableSeeder;
 use Database\Seeders\PemasukansTableSeeder;
 use Database\Seeders\TransaksisTableSeeder;
 use Database\Seeders\PengeluaransTableSeeder;
+use Database\Seeders\PemindahanSaldosTableSeeder;
 use Database\Seeders\SumberPemasukansTableSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,7 +27,9 @@ class DatabaseSeeder extends Seeder
     $this->call(KegiatansTableSeeder::class);
     $this->call(KebutuhansTableSeeder::class);
     $this->call(PengeluaransTableSeeder::class);
-    $this->call(PemasukansTableSeeder::class);
     $this->call(SumberPemasukansTableSeeder::class);
+    $this->call(PemasukansTableSeeder::class);
+    $this->call(GaleriesTableSeeder::class);
+    $this->call(PemindahanSaldosTableSeeder::class);
   }
 }

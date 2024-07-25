@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/contohmodule",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ContohModule\\": "",
+            "Modules\\ContohModule\\App\\": "app/",
+            "Modules\\ContohModule\\Database\\Factories\\": "database/factories/",
+            "Modules\\ContohModule\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\ContohModule\\Tests\\": "tests/"
+        }
+    }
+}

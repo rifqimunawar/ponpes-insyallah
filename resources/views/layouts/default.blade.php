@@ -42,6 +42,7 @@
 
         <div id="content" class="app-content {{ $appContentClass }}">
             @yield('content')
+            @yield('master-content')
         </div>
 
         @include('includes.component.scroll-top-btn')

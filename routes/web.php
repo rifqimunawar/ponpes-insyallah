@@ -158,6 +158,7 @@ Route::post('/pemasukan/{id}/update', 'PemasukanController@update')->name('pemas
 Route::delete('/pemasukan/{id}', 'PemasukanController@destroy')->name('pemasukan.destroy');
 
 Route::get('/pemindahan-saldo/create', 'PemindahanSaldoController@create')->name('pemindahan-saldo.create');
+Route::post('/pemindahan-saldo', 'PemindahanSaldoController@store')->name('pemindahan-saldo.store');
 
 // ============================================================================= MASTER
 
