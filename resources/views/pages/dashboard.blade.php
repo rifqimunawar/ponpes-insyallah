@@ -33,19 +33,19 @@
     <!-- BEGIN row -->
     <div class="row">
         <!-- BEGIN col-3 -->
-        <div class="col-xl-3 col-md-6">
+        <a href="{{ route('pengeluaran.create') }}" class="col-xl-3 col-md-6" style="text-decoration: none;">
             <div class="widget widget-stats bg-teal">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
-                    <div class="stats-title">TODAY'S VISITS</div>
-                    <div class="stats-number">{{ $total_saldo }}</div>
+                    <div class="stats-title">PENGELUARAN</div>
+                    <div class="stats-number">{{ 'Rp ' . number_format($total_saldo, 0, ',', '.') }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
                     </div>
                     <div class="stats-desc">Better than last week (70.1%)</div>
                 </div>
             </div>
-        </div>
+        </a>
         <!-- END col-3 -->
         <!-- BEGIN col-3 -->
         <div class="col-xl-3 col-md-6">
