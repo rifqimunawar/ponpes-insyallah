@@ -91,6 +91,7 @@
                                 <th width="1%"></th>
                                 <th width="1%" data-orderable="false"></th>
                                 <th class="text-nowrap">Nama</th>
+                                <th class="text-nowrap">Pengeluaran</th>
                                 <th class="text-nowrap"></th>
                             </tr>
                         </thead>
@@ -101,15 +102,14 @@
                                     <td width="1%"><img src="/assets/img/user/user-2.jpg"
                                             class="rounded h-30px my-n1 mx-n1" /></td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ 'Rp ' . number_format($item->total_pengeluaran, 0, ',', '.') }}<d>
                                     <td class="text-center">
                                         <a href="{{ route('kebutuhan.edit', $item->id) }}"
                                             class="font-large btn btn-warning">
                                             <ion-icon name="create-outline"></ion-icon>
                                             <a href="{{ route('kebutuhan.destroy', $item->id) }}" class="btn btn-danger"
                                                 data-confirm-delete="true"><ion-icon name="trash-outline"></ion-icon></a>
-
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>

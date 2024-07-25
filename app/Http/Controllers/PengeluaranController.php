@@ -86,7 +86,8 @@ class PengeluaranController extends Controller
     $pengeluaran = Pengeluaran::findOrFail($id);
     $pengeluaran->delete();
     Alert::success('Success', 'Data berhasil dihapus');
-    return response()->json(['message' => 'success']);
+    // return response()->json(['message' => 'success']);
+    return redirect()->route('pengeluaran.index');
   }
 
 }

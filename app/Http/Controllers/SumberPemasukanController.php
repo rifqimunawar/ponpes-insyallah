@@ -10,11 +10,17 @@ class SumberPemasukanController extends Controller
 {
   public function index()
   {
-    $sumber_pemasukan = SumberPemasukan::all();
+    $data = SumberPemasukan::with('pemasukan')->get();
+
+    foreach ($data as $sumber_pemasukan) {
+      $sumber_pemasukan->total_pemasukan = $sumber_pemasukan->pemasukan->sum('saldo');
+    }
+
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
-    return view('pages.master.sumber-pemasukan.index', ['data' => $sumber_pemasukan]);
+    // dd($data);
+    return view('pages.master.sumber-pemasukan.index', ['data' => $data]);
   }
 
   public function create()

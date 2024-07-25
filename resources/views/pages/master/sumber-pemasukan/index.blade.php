@@ -91,6 +91,7 @@
                                 <th width="1%"></th>
                                 <th width="1%" data-orderable="false"></th>
                                 <th class="text-nowrap">Nama</th>
+                                <th class="text-nowrap">Pemasukan</th>
                                 <th class="text-nowrap"></th>
                             </tr>
                         </thead>
@@ -101,20 +102,12 @@
                                     <td width="1%"><img src="/assets/img/user/user-2.jpg"
                                             class="rounded h-30px my-n1 mx-n1" /></td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ 'Rp ' . number_format($item->total_pemasukan, 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('sumber-pemasukan.edit', $item->id) }}"
                                             class="font-large btn btn-warning">
                                             <ion-icon name="create-outline"></ion-icon>
-                                            {{-- </a>
-                                          <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-link p-0 m-0"
-                                                onclick="return confirm('Are you sure?')">
-                                                <ion-icon name="trash-outline"></ion-icon>
-                                            </button>
-                                        </form> --}}
+
                                             <a href="{{ route('sumber-pemasukan.destroy', $item->id) }}"
                                                 class="btn btn-danger" data-confirm-delete="true"><ion-icon
                                                     name="trash-outline"></ion-icon></a>

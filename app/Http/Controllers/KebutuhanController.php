@@ -10,7 +10,12 @@ class KebutuhanController extends Controller
 {
   public function index()
   {
-    $data = Kebutuhan::all();
+    $data = Kebutuhan::with('pengeluarans')->get();
+
+    foreach ($data as $kebutuhan) {
+      $kebutuhan->total_pengeluaran = $kebutuhan->pengeluarans->sum('saldo');
+    }
+
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);

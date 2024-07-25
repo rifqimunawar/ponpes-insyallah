@@ -111,21 +111,15 @@
                                     <td>{{ $item->kegiatan->name }}</td>
                                     <td>{{ $item->rekening->name }}</td>
                                     <td>Win 95+</td>
-                                    <td>
-                                        <a href="{{ route('pengeluaran.edit', $item->id) }}" class="font-large">
+                                    <td class="text-center">
+                                        <a href="{{ route('pengeluaran.edit', $item->id) }}"
+                                            class="font-large btn btn-warning">
                                             <ion-icon name="create-outline"></ion-icon>
-                                        </a>
-                                        <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-link p-0 m-0"
-                                                onclick="return confirm('Are you sure?')">
-                                                <ion-icon name="trash-outline"></ion-icon>
-                                            </button>
-                                        </form>
-                                    </td>
 
+                                            <a href="{{ route('pengeluaran.destroy', $item->id) }}" class="btn btn-danger"
+                                                data-confirm-delete="true"><ion-icon name="trash-outline"></ion-icon></a>
+
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

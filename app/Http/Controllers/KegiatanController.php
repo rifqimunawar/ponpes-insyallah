@@ -10,12 +10,19 @@ class KegiatanController extends Controller
 {
   public function index()
   {
-    $data = Kegiatan::all();
+    $data = Kegiatan::with('pengeluarans')->get();
+
+    // Tambahkan total pengeluaran ke setiap kegiatan
+    foreach ($data as $kegiatan) {
+      $kegiatan->total_pengeluaran = $kegiatan->pengeluarans->sum('saldo');
+    }
+
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
     return view('pages.master.kegiatan.index', ['data' => $data]);
   }
+
 
   public function create()
   {
