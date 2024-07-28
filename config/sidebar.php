@@ -16,29 +16,19 @@ return [
     [
       'icon' => 'fa fa-sitemap',
       'title' => 'Dashboard',
+      'url' => '/dashboard',
+      'route-name' => 'dashboard'
+    ],
+    [
+      'icon' => 'icon-wallet',
+      'title' => 'Transaksi',
       'url' => 'javascript:;',
       'caret' => true,
       'sub_menu' => [
-
-        // [
-        // 	'url' => '/dashboard/v2',
-        // 	'title' => 'Dashboard v2',
-        // 	'route-name' => 'dashboard-v2'
-        // ],[
-        // 	'url' => '/dashboard/v3',
-        // 	'title' => 'Dashboard v3',
-        // 	'route-name' => 'dashboard-v3'
-        // ],
-
         [
           'url' => '/pemindahan-saldo/create',
           'title' => 'Pemindahan Saldo',
-          'route-name' => 'pemindahan-saldo.index'
-        ],
-        [
-          'url' => '/dashboard',
-          'title' => 'Dashboard',
-          'route-name' => 'dashboard'
+          'route-name' => 'pemindahan-saldo.create'
         ],
         [
           'url' => '/pengeluaran',

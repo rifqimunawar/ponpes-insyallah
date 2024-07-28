@@ -3,20 +3,20 @@
 @section('title', 'Dashboard V2')
 
 @push('css')
-    <link href="{{ asset('/assets/plugins/jvectormap-next/jquery-jvectormap.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('/assets/plugins/jvectormap-next/jquery-jvectormap.css') }}" rel="stylesheet" />
     <link href="{{ asset('/assets/plugins/datepickk/dist/datepickk.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/assets/plugins/gritter/css/jquery.gritter.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/assets/plugins/nvd3/build/nv.d3.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/nvd3/build/nv.d3.css') }}" rel="stylesheet" /> --}}
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('/assets/plugins/d3/d3.min.js') }}"></script>
+    {{-- <script src="{{ asset('/assets/plugins/d3/d3.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/nvd3/build/nv.d3.js') }}"></script>
     <script src="{{ asset('/assets/plugins/jvectormap-next/jquery-jvectormap.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/jvectormap-content/world-mill.js') }}"></script>
     <script src="{{ asset('/assets/plugins/datepickk/dist/datepickk.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/gritter/js/jquery.gritter.js') }}"></script>
-    <script src="{{ asset('/assets/js/demo/dashboard-v2.js') }}"></script>
+    <script src="{{ asset('/assets/js/demo/dashboard-v2.js') }}"></script> --}}
 @endpush
 
 @section('content')
@@ -24,20 +24,20 @@
     <ol class="breadcrumb float-xl-end">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
         <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-        <li class="breadcrumb-item active">Dashboard v2</li>
+        <li class="breadcrumb-item active">Dashboard </li>
     </ol>
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Dashboard v2 <small>header small text goes here...</small></h1>
+    <h1 class="page-header">Dashboard <small>Statistik Keuangan Rifqi Munawar</small></h1>
     <!-- END page-header -->
     <!-- BEGIN row -->
     <div class="row">
         <!-- BEGIN col-3 -->
-        <a href="{{ route('pengeluaran.create') }}" class="col-xl-3 col-md-6" style="text-decoration: none;">
+        <a href="" class="col-xl-4 col-md-6" style="text-decoration: none;">
             <div class="widget widget-stats bg-teal">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
-                    <div class="stats-title">PENGELUARAN</div>
+                    <div class="stats-title">SISA SALDO</div>
                     <div class="stats-number">{{ 'Rp ' . number_format($total_saldo, 0, ',', '.') }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 70.1%;"></div>
@@ -48,49 +48,34 @@
         </a>
         <!-- END col-3 -->
         <!-- BEGIN col-3 -->
-        <div class="col-xl-3 col-md-6">
+        <a href="{{ route('pengeluaran.create') }}" class="col-xl-4 col-md-6" style="text-decoration: none;">
             <div class="widget widget-stats bg-blue">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
                 <div class="stats-content">
-                    <div class="stats-title">TODAY'S PROFIT</div>
-                    <div class="stats-number">180,200</div>
+                    <div class="stats-title">TOTAL PENGELUARAN</div>
+                    <div class="stats-number">{{ 'Rp ' . number_format($total_pengeluaran, 0, ',', '.') }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 40.5%;"></div>
                     </div>
                     <div class="stats-desc">Better than last week (40.5%)</div>
                 </div>
             </div>
-        </div>
+        </a>
         <!-- END col-3 -->
         <!-- BEGIN col-3 -->
-        <div class="col-xl-3 col-md-6">
+        <a href="{{ route('pemasukan.create') }}" class="col-xl-4 col-md-6" style="text-decoration: none">
             <div class="widget widget-stats bg-indigo">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
                 <div class="stats-content">
-                    <div class="stats-title">NEW ORDERS</div>
-                    <div class="stats-number">38,900</div>
+                    <div class="stats-title">TOTAL PEMASUKAN</div>
+                    <div class="stats-number">{{ 'Rp ' . number_format($total_pemasukan, 0, ',', '.') }}</div>
                     <div class="stats-progress progress">
                         <div class="progress-bar" style="width: 76.3%;"></div>
                     </div>
                     <div class="stats-desc">Better than last week (76.3%)</div>
                 </div>
             </div>
-        </div>
-        <!-- END col-3 -->
-        <!-- BEGIN col-3 -->
-        <div class="col-xl-3 col-md-6">
-            <div class="widget widget-stats bg-gray-900">
-                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-                <div class="stats-content">
-                    <div class="stats-title">NEW COMMENTS</div>
-                    <div class="stats-number">3,988</div>
-                    <div class="stats-progress progress">
-                        <div class="progress-bar" style="width: 54.9%;"></div>
-                    </div>
-                    <div class="stats-desc">Better than last week (54.9%)</div>
-                </div>
-            </div>
-        </div>
+        </a>
         <!-- END col-3 -->
     </div>
     <!-- END row -->
@@ -101,7 +86,7 @@
             <div class="widget-chart with-sidebar" data-bs-theme="dark">
                 <div class="widget-chart-content bg-gray-800">
                     <h4 class="chart-title">
-                        Visitors Analytics
+                        Statitik
                         <small>Where do our visitors come from</small>
                     </h4>
                     <div id="visitors-line-chart" class="widget-chart-full-width dark-mode" style="height: 257px;"></div>
@@ -129,23 +114,26 @@
             <div class="panel panel-inverse" data-sortable-id="index-1">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Visitors Origin
+                        Range Waktu
                     </h4>
                 </div>
-                <div id="visitors-map" class="bg-gray-900" data-bs-theme="dark" style="height: 170px;"></div>
                 <div class="list-group list-group-flush " data-bs-theme="dark">
-                    <a href="javascript:;" class="list-group-item list-group-item-action d-flex">
-                        <span class="flex-1">1. United State</span>
-                        <span class="badge bg-teal fs-10px">20.95%</span>
-                    </a>
-                    <a href="javascript:;" class="list-group-item list-group-item-action d-flex">
-                        <span class="flex-1">2. India</span>
-                        <span class="badge bg-blue fs-10px">16.12%</span>
-                    </a>
-                    <a href="javascript:;" class="list-group-item list-group-item-action d-flex rounded-bottom">
-                        <span class="flex-1">3. Mongolia</span>
-                        <span class="badge bg-gray-600 fs-10px">14.99%</span>
-                    </a>
+                    <form action="" method="post">
+
+                        <div class="list-group-item list-group-item-action d-flex">
+                            <span class="col-xl-3">Dari Tanggal</span>
+                            <input type="date" class="form-control" required name="" id="">
+                        </div>
+                        <div class="list-group-item list-group-item-action d-flex">
+                            <span class="col-xl-3">Sampai Tanggal</span>
+                            <input type="date" class="form-control" required name="" id="">
+                        </div>
+                        <div class="list-group-item list-group-item-action">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-sm btn-info">Lihat</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -153,7 +141,7 @@
     </div>
     <!-- END row -->
     <!-- BEGIN row -->
-    <div class="row">
+    {{-- <div class="row">
         <!-- BEGIN col-4 -->
         <div class="col-xl-4 col-lg-6">
             <!-- BEGIN panel -->
@@ -323,6 +311,6 @@
             <!-- END panel -->
         </div>
         <!-- END col-4 -->
-    </div>
+    </div> --}}
     <!-- END row -->
 @endsection
