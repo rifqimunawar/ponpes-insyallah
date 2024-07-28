@@ -42,31 +42,31 @@ class KebutuhansTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 4,
-                'name' => 'nongkrong/jajan',
-                'created_at' => '2024-07-21 09:32:34',
-                'updated_at' => '2024-07-21 09:32:34',
-            ),
-            4 => 
-            array (
                 'id' => 5,
                 'name' => 'cukur rambut',
                 'created_at' => '2024-07-21 09:35:38',
                 'updated_at' => '2024-07-21 09:35:38',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 6,
                 'name' => 'loundry',
                 'created_at' => '2024-07-21 09:35:54',
                 'updated_at' => '2024-07-21 09:35:54',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 7,
                 'name' => 'pusla/kuota',
                 'created_at' => '2024-07-21 09:36:11',
                 'updated_at' => '2024-07-21 09:36:11',
+            ),
+            6 => 
+            array (
+                'id' => 8,
+                'name' => 'service motor',
+                'created_at' => '2024-07-28 15:41:09',
+                'updated_at' => '2024-07-28 15:41:09',
             ),
         ));
         

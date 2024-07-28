@@ -33,6 +33,13 @@ class SumberPemasukansTableSeeder extends Seeder
                 'created_at' => '2024-07-23 08:23:01',
                 'updated_at' => '2024-07-23 08:23:09',
             ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'Hibah',
+                'created_at' => '2024-07-25 15:24:34',
+                'updated_at' => '2024-07-25 15:24:34',
+            ),
         ));
         
         

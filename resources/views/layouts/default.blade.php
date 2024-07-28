@@ -3,6 +3,7 @@
 
 <head>
     @include('includes.head')
+    @livewireStyles
 </head>
 @php
     $bodyClass = !empty($appBoxedLayout) ? 'boxed-layout ' : '';
@@ -55,7 +56,7 @@
 
     @include('includes.page-js')
     @include('sweetalert::alert')
-
+    @livewireScripts
 </body>
 
 </html>

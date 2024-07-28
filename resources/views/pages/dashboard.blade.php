@@ -3,20 +3,41 @@
 @section('title', 'Dashboard V2')
 
 @push('css')
-    {{-- <link href="{{ asset('/assets/plugins/jvectormap-next/jquery-jvectormap.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/assets/plugins/datepickk/dist/datepickk.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/jvectormap-next/jquery-jvectormap.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('/assets/plugins/datepickk/dist/datepickk.min.css') }}" rel="stylesheet" /> --}}
     <link href="{{ asset('/assets/plugins/gritter/css/jquery.gritter.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/assets/plugins/nvd3/build/nv.d3.css') }}" rel="stylesheet" /> --}}
+    <link href="{{ asset('/assets/plugins/nvd3/build/nv.d3.css') }}" rel="stylesheet" />
+    <style>
+        .widget-stats {
+            transition: background-color 0.5s ease;
+        }
+
+        .bg-danger {
+            background-color: #dc3545;
+        }
+
+        .bg-warning {
+            background-color: #ffc107;
+        }
+
+        .bg-success {
+            background-color: #28a745;
+        }
+
+        .bg-secondary {
+            background-color: #6c757d;
+        }
+    </style>
 @endpush
 
 @push('scripts')
-    {{-- <script src="{{ asset('/assets/plugins/d3/d3.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/d3/d3.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/nvd3/build/nv.d3.js') }}"></script>
     <script src="{{ asset('/assets/plugins/jvectormap-next/jquery-jvectormap.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/jvectormap-content/world-mill.js') }}"></script>
-    <script src="{{ asset('/assets/plugins/datepickk/dist/datepickk.min.js') }}"></script>
+    {{-- <script src="{{ asset('/assets/plugins/datepickk/dist/datepickk.min.js') }}"></script> --}}
     <script src="{{ asset('/assets/plugins/gritter/js/jquery.gritter.js') }}"></script>
-    <script src="{{ asset('/assets/js/demo/dashboard-v2.js') }}"></script> --}}
+    <script src="{{ asset('/assets/js/demo/dashboard-v2.js') }}"></script>
 @endpush
 
 @section('content')
@@ -33,7 +54,7 @@
     <!-- BEGIN row -->
     <div class="row">
         <!-- BEGIN col-3 -->
-        <a href="" class="col-xl-4 col-md-6" style="text-decoration: none;">
+        <a href="" class="col-xl-3 col-md-6" style="text-decoration: none;">
             <div class="widget widget-stats bg-teal">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                 <div class="stats-content">
@@ -48,7 +69,7 @@
         </a>
         <!-- END col-3 -->
         <!-- BEGIN col-3 -->
-        <a href="{{ route('pengeluaran.create') }}" class="col-xl-4 col-md-6" style="text-decoration: none;">
+        <a href="{{ route('pengeluaran.create') }}" class="col-xl-3 col-md-6" style="text-decoration: none;">
             <div class="widget widget-stats bg-blue">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
                 <div class="stats-content">
@@ -63,7 +84,7 @@
         </a>
         <!-- END col-3 -->
         <!-- BEGIN col-3 -->
-        <a href="{{ route('pemasukan.create') }}" class="col-xl-4 col-md-6" style="text-decoration: none">
+        <a href="{{ route('pemasukan.create') }}" class="col-xl-3 col-md-6" style="text-decoration: none">
             <div class="widget widget-stats bg-indigo">
                 <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
                 <div class="stats-content">
@@ -77,73 +98,38 @@
             </div>
         </a>
         <!-- END col-3 -->
+        <div class="col-xl-3 col-md-6">
+            @php
+                $initialColor = $pengeluaran_hari_ini >= $target_pengeluaran_harian ? 'bg-danger' : 'bg-success';
+                $widgetId = $pengeluaran_hari_ini >= $target_pengeluaran_harian ? 'color-widget' : '';
+            @endphp
+
+            <div class="widget widget-stats {{ $initialColor }}" id="{{ $widgetId }}">
+                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
+                <div class="stats-content">
+                    <div class="stats-title">TARGET PENGELUARAN HARIAN</div>
+                    <div class="stats-number">{{ 'Rp ' . number_format($target_pengeluaran_harian, 0, ',', '.') }}</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 54.9%;"></div>
+                    </div>
+                    <div class="stats-desc">
+                        Sudah Keluar
+                        ({{ $pengeluaran_hari_ini ? 'Rp ' . number_format($pengeluaran_hari_ini, 0, ',', '.') : '0' }})
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <!-- END row -->
-    <!-- BEGIN row -->
-    <div class="row">
-        <!-- BEGIN col-8 -->
-        <div class="col-xl-8">
-            <div class="widget-chart with-sidebar" data-bs-theme="dark">
-                <div class="widget-chart-content bg-gray-800">
-                    <h4 class="chart-title">
-                        Statitik
-                        <small>Where do our visitors come from</small>
-                    </h4>
-                    <div id="visitors-line-chart" class="widget-chart-full-width dark-mode" style="height: 257px;"></div>
-                </div>
-                <div class="widget-chart-sidebar bg-gray-900">
-                    <div class="chart-number">
-                        1,225,729
-                        <small>Total visitors</small>
-                    </div>
-                    <div class="flex-grow-1 d-flex align-items-center">
-                        <div id="visitors-donut-chart" data-bs-theme="dark" style="height: 180px"></div>
-                    </div>
-                    <ul class="chart-legend fs-11px">
-                        <li><i class="fa fa-circle fa-fw text-blue fs-9px me-5px t-minus-1"></i> 34.0% <span>New
-                                Visitors</span></li>
-                        <li><i class="fa fa-circle fa-fw text-teal fs-9px me-5px t-minus-1"></i> 56.0% <span>Return
-                                Visitors</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- END col-8 -->
-        <!-- BEGIN col-4 -->
-        <div class="col-xl-4">
-            <div class="panel panel-inverse" data-sortable-id="index-1">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Range Waktu
-                    </h4>
-                </div>
-                <div class="list-group list-group-flush " data-bs-theme="dark">
-                    <form action="" method="post">
-
-                        <div class="list-group-item list-group-item-action d-flex">
-                            <span class="col-xl-3">Dari Tanggal</span>
-                            <input type="date" class="form-control" required name="" id="">
-                        </div>
-                        <div class="list-group-item list-group-item-action d-flex">
-                            <span class="col-xl-3">Sampai Tanggal</span>
-                            <input type="date" class="form-control" required name="" id="">
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-sm btn-info">Lihat</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- END col-4 -->
+    <div>
+        @livewire('pie-chart')
     </div>
     <!-- END row -->
     <!-- BEGIN row -->
     {{-- <div class="row">
         <!-- BEGIN col-4 -->
-        <div class="col-xl-4 col-lg-6">
+        <div class="col-xl-3 col-lg-6">
             <!-- BEGIN panel -->
             <div class="panel panel-inverse" data-sortable-id="index-2">
                 <div class="panel-heading">
@@ -206,7 +192,7 @@
         </div>
         <!-- END col-4 -->
         <!-- BEGIN col-4 -->
-        <div class="col-xl-4 col-lg-6">
+        <div class="col-xl-3 col-lg-6">
             <!-- BEGIN panel -->
             <div class="panel panel-inverse" data-sortable-id="index-3">
                 <div class="panel-heading">
@@ -231,7 +217,7 @@
         </div>
         <!-- END col-4 -->
         <!-- BEGIN col-4 -->
-        <div class="col-xl-4 col-lg-6">
+        <div class="col-xl-3 col-lg-6">
             <!-- BEGIN panel -->
             <div class="panel panel-inverse" data-sortable-id="index-4">
                 <div class="panel-heading">
@@ -314,3 +300,18 @@
     </div> --}}
     <!-- END row -->
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const colors = ['bg-danger', 'bg-warning', 'bg-success', 'bg-secondary'];
+        let index = 0;
+
+        setInterval(() => {
+            const widget = document.getElementById('color-widget');
+            if (widget) {
+                widget.classList.remove(...colors);
+                widget.classList.add(colors[index]);
+                index = (index + 1) % colors.length;
+            }
+        }, 1000);
+    });
+</script>
