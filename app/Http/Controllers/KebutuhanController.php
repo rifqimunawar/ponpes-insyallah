@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Kebutuhan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KebutuhanController extends Controller
@@ -30,6 +31,8 @@ class KebutuhanController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $newData = Kebutuhan::create($data);
 
     Alert::success('Success', 'Data berhasil ditambahkan');
@@ -51,6 +54,8 @@ class KebutuhanController extends Controller
   public function update(Request $request, $id)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $updateData = Kebutuhan::findOrFail($id);
     $updateData->update($data);
     Alert::success('Success', 'Data berhasil diupdate');

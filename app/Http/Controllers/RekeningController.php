@@ -11,12 +11,14 @@ class RekeningController extends Controller
 {
   public function index()
   {
-    $data = Rekening::all();
+    $userLogin = Auth::user()->id;
+    $data = Rekening::where('user_id', $userLogin)->get();
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
     return view('pages.master.rekening.index', ['data' => $data]);
   }
+
   public function create()
   {
     return view('pages.master.rekening.create');

@@ -32,6 +32,8 @@ class SumberPemasukanController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $sumber_pemasukan = SumberPemasukan::create($data);
 
     Alert::success('Success', 'Data berhasil ditambahkan');
@@ -53,6 +55,8 @@ class SumberPemasukanController extends Controller
   public function update(Request $request, $id)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $sumber_pemasukan = SumberPemasukan::findOrFail($id);
     $sumber_pemasukan->update($data);
     Alert::success('Success', 'Data berhasil diupdate');

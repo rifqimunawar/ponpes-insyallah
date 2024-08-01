@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Kegiatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KegiatanController extends Controller
@@ -32,6 +33,8 @@ class KegiatanController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $newData = Kegiatan::create($data);
 
     Alert::success('Success', 'Data berhasil ditambahkan');
@@ -53,6 +56,8 @@ class KegiatanController extends Controller
   public function update(Request $request, $id)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $kegiatan = Kegiatan::findOrFail($id);
     $kegiatan->update($data);
     Alert::success('Success', 'Data berhasil diupdate');

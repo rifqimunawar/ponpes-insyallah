@@ -15,7 +15,8 @@ class PengeluaranController extends Controller
 {
   public function index()
   {
-    $pengeluarans = Pengeluaran::with('kegiatan')->get();
+    $userLogin = Auth::user()->id;
+    $pengeluarans = Pengeluaran::where('user_id', $userLogin)->with('kegiatan')->get();
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
@@ -24,9 +25,10 @@ class PengeluaranController extends Controller
 
   public function create()
   {
-    $rekening = Rekening::all();
-    $kegiatan = Kegiatan::all();
-    $kebutuhan = Kebutuhan::all();
+    $userLogin = Auth::user()->id;
+    $rekening = Rekening::where('user_id', $userLogin)->get();
+    $kegiatan = Kegiatan::where('user_id', $userLogin)->get();
+    $kebutuhan = Kebutuhan::where('user_id', $userLogin)->get();
     return view('pages.pengeluaran.create', ['rekening' => $rekening, 'kegiatan' => $kegiatan, 'kebutuhan' => $kebutuhan]);
   }
   public function store(Request $request)
@@ -71,9 +73,10 @@ class PengeluaranController extends Controller
 
   public function edit($id)
   {
-    $rekening = Rekening::all();
-    $kegiatan = Kegiatan::all();
-    $kebutuhan = Kebutuhan::all();
+    $userLogin = Auth::user()->id;
+    $rekening = Rekening::where('user_id', $userLogin)->get();
+    $kegiatan = Kegiatan::where('user_id', $userLogin)->get();
+    $kebutuhan = Kebutuhan::where('user_id', $userLogin)->get();
     $data = Pengeluaran::findOrFail($id);
     return view('pages.pengeluaran.edit', ['data' => $data, 'rekening' => $rekening, 'kegiatan' => $kegiatan, 'kebutuhan' => $kebutuhan]);
     // return response()->json(['message' => 'success', 'data' => $data]);

@@ -16,7 +16,8 @@ class PemasukanController extends Controller
 {
   public function index()
   {
-    $pemasukan = Pemasukan::with('sumber_pemasukan', 'rekening')->get();
+    $userLogin = Auth::user()->id;
+    $pemasukan = Pemasukan::where('user_id', $userLogin)->with('sumber_pemasukan', 'rekening')->get();
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
@@ -25,8 +26,9 @@ class PemasukanController extends Controller
 
   public function create()
   {
-    $rekening = Rekening::all();
-    $sumber = SumberPemasukan::all();
+    $userLogin = Auth::user()->id;
+    $rekening = Rekening::where('user_id', $userLogin)->get();
+    $sumber = SumberPemasukan::where('user_id', $userLogin)->get();
     return view('pages.pemasukan.create', ['sumber' => $sumber, 'rekening' => $rekening]);
   }
 
@@ -62,8 +64,9 @@ class PemasukanController extends Controller
 
   public function edit($id)
   {
-    $rekening = Rekening::all();
-    $sumber = SumberPemasukan::all();
+    $userLogin = Auth::user()->id;
+    $rekening = Rekening::where('user_id', $userLogin)->get();
+    $sumber = SumberPemasukan::where('user_id', $userLogin)->get();
     $data = Pemasukan::findOrFail($id);
     return view('pages.pemasukan.edit', ['data' => $data, 'rekening' => $rekening, 'sumber' => $sumber]);
   }
