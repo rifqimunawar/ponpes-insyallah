@@ -3,37 +3,111 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User; // Perbarui sesuai namespace model Anda
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+  /*
+  |--------------------------------------------------------------------------
+  | Login Controller
+  |--------------------------------------------------------------------------
+  |
+  | This controller handles authenticating users for the application and
+  | redirecting them to your home screen. The controller uses a trait
+  | to conveniently provide its functionality to your applications.
+  |
+  */
 
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+  public function showLoginForm()
+  {
+    if (Auth::check()) {
+      return redirect('/dashboard');
     }
+    return view('pages.auth.login');
+  }
+
+  public function authenticate(Request $request)
+  {
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+      // Authentication passed...
+      Alert::success('Sucess', 'Anda Sudah Masuk');
+      return redirect()->intended('/dashboard');
+    } else {
+      // Authentication failed...
+      Alert::error('Error', 'Email atau password salah!!!');
+      return redirect()->route('login');
+    }
+  }
+
+  public function showRegistrationForm()
+  {
+    return view('pages.auth.register');
+  }
+  public function register(Request $request)
+  {
+    // Rule validasi untuk name dan password
+    $rules = [
+      'name' => 'required|unique:users,name',
+      'email' => 'required|unique:users,email',
+      // 'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+    ];
+
+    $messages = [
+      'name.required' => 'Nama wajib diisi.',
+      'name.unique' => 'Nama sudah digunakan.',
+      'email.required' => 'Email wajib diisi.',
+      'email.unique' => 'Email sudah digunakan.',
+      'password.required' => 'Password wajib diisi.',
+      'password.min' => 'Password minimal 8 karakter.',
+      'password.regex' => 'Password harus terdiri dari huruf kapital, huruf kecil, dan angka.',
+    ];
+
+    // Validasi input
+    $validator = Validator::make($request->all(), $rules, $messages);
+
+    if ($validator->fails()) {
+      return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    // Buat user baru
+    User::create([
+      'name' => $request->name,
+      'email' => $request->email,
+      'role_id' => 2,
+      'password' => Hash::make($request->password),
+    ]);
+
+    Alert::success('Success', 'Anda Berhasil Register');
+    return redirect()->route('login');
+  }
+
+
+  public function logout(Request $request)
+  {
+    Auth::logout();
+
+    // Hapus session dan redirect ke halaman login atau ke halaman yang diinginkan
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    Alert::info('Sucess', 'Terima sudah berkunjung!!!!.');
+    return redirect()->route('login');
+  }
+
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('guest')->except('logout');
+  }
 }

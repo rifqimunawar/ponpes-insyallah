@@ -80,6 +80,9 @@ class Backup extends Command
       'galeries' => [
         'galeries',
       ],
+      'roles' => [
+        'roles',
+      ],
 
     ];
     if ($opt_users == 1 || $arg_type == 'users')

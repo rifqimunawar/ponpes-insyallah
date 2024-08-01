@@ -8,6 +8,8 @@ use App\Model\Kebutuhan;
 use App\Model\Pemasukan;
 use Illuminate\Http\Request;
 use App\Model\SumberPemasukan;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PemasukanController extends Controller
@@ -31,9 +33,15 @@ class PemasukanController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
-
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     if (isset($data['saldo'])) {
       $data['saldo'] = preg_replace('/[^0-9]/', '', $data['saldo']);
+    }
+
+    // Konversi format tanggal
+    if (isset($data['tanggal'])) {
+      $data['tanggal'] = Carbon::createFromFormat('m/d/Y', $data['tanggal'])->format('Y-m-d');
     }
 
     $rekening = Rekening::findOrFail($data['rekening_id']);
@@ -63,10 +71,16 @@ class PemasukanController extends Controller
   public function update(Request $request, $id)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $pemasukan = Pemasukan::findOrFail($id);
 
     if (isset($data['saldo'])) {
       $data['saldo'] = preg_replace('/[^0-9]/', '', $data['saldo']);
+    }
+    // Konversi format tanggal
+    if (isset($data['tanggal'])) {
+      $data['tanggal'] = Carbon::createFromFormat('m/d/Y', $data['tanggal'])->format('Y-m-d');
     }
 
     $rekening = Rekening::findOrFail($data['rekening_id']);

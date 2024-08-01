@@ -7,6 +7,8 @@ use App\Model\Rekening;
 use App\Model\Kebutuhan;
 use App\Model\Pengeluaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PengeluaranController extends Controller
@@ -27,23 +29,38 @@ class PengeluaranController extends Controller
     $kebutuhan = Kebutuhan::all();
     return view('pages.pengeluaran.create', ['rekening' => $rekening, 'kegiatan' => $kegiatan, 'kebutuhan' => $kebutuhan]);
   }
-
   public function store(Request $request)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
 
     if (isset($data['saldo'])) {
       $data['saldo'] = preg_replace('/[^0-9]/', '', $data['saldo']);
     }
 
+    // Konversi format tanggal
+    if (isset($data['tanggal'])) {
+      $data['tanggal'] = Carbon::createFromFormat('m/d/Y', $data['tanggal'])->format('Y-m-d');
+    }
+
+
     $rekening = Rekening::findOrFail($data['rekening_id']);
+
+    if ($rekening->saldo < $data['saldo']) {
+      Alert::error('Oops...', 'Saldo di rekening ' . $rekening->name . ' tidak cukup');
+      return redirect()->route('pengeluaran.create');
+    }
+
     $rekening->saldo -= $data['saldo'];
     $rekening->save();
 
     $pengeluaran = Pengeluaran::create($data);
+
     Alert::success('Success', 'Data berhasil ditambahkan');
     return redirect()->route('pengeluaran.index');
   }
+
 
 
   public function show($id)
@@ -65,10 +82,17 @@ class PengeluaranController extends Controller
   public function update(Request $request, $id)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $pengeluaran = Pengeluaran::findOrFail($id);
 
     if (isset($data['saldo'])) {
       $data['saldo'] = preg_replace('/[^0-9]/', '', $data['saldo']);
+    }
+
+    // Konversi format tanggal
+    if (isset($data['tanggal'])) {
+      $data['tanggal'] = Carbon::createFromFormat('m/d/Y', $data['tanggal'])->format('Y-m-d');
     }
 
     $rekening = Rekening::findOrFail($data['rekening_id']);

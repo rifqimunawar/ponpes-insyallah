@@ -91,7 +91,8 @@
                                     required>
                                     <option selected disabled> -- pilih -- </option>
                                     @foreach ($rekening as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->name }} :
+                                            ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})</option>
                                     @endforeach
 
                                 </select>
@@ -104,7 +105,8 @@
                                     required>
                                     <option selected disabled> -- pilih -- </option>
                                     @foreach ($rekening as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->name }} :
+                                            ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})</option>
                                     @endforeach
 
                                 </select>

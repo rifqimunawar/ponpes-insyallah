@@ -84,13 +84,16 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="form-label col-form-label col-lg-4">Rekening</label>
                             <div class="col-lg-8">
                                 <select class="form-select" name="rekening_id" aria-label="Default select example" required>
                                     <option selected disabled> -- pilih -- </option>
                                     @foreach ($rekening as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->name }} :
+                                            ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})
+                                        </option>
                                     @endforeach
 
                                 </select>

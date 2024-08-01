@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Rekening;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RekeningController extends Controller
@@ -24,6 +25,8 @@ class RekeningController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $rekening = Rekening::create($data);
 
     Alert::success('Success', 'Data berhasil ditambahkan');
@@ -39,6 +42,8 @@ class RekeningController extends Controller
   public function update(Request $request, $id)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
     $rekening = Rekening::findOrFail($id);
     $rekening->update($data);
     Alert::success('Success', 'Data berhasil diupdate');

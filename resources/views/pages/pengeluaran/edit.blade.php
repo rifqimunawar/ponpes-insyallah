@@ -100,7 +100,7 @@
                                     @foreach ($rekening as $item)
                                         <option value="{{ $item->id }}"
                                             {{ isset($data) && $data->rekening_id == $item->id ? 'selected' : '' }}>
-                                            {{ $item->name }}
+                                            {{ $item->name }} : ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})
                                         </option>
                                     @endforeach
                                 </select>

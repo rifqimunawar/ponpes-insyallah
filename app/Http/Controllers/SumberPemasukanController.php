@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\SumberPemasukan;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SumberPemasukanController extends Controller
 {
   public function index()
   {
+    $userLogin = Auth::user();
     $data = SumberPemasukan::with('pemasukan')->get();
 
     foreach ($data as $sumber_pemasukan) {
@@ -19,7 +21,7 @@ class SumberPemasukanController extends Controller
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
-    // dd($data);
+    // dd($userLogin);
     return view('pages.master.sumber-pemasukan.index', ['data' => $data]);
   }
 

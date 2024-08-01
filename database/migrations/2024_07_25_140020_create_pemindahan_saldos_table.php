@@ -12,10 +12,11 @@ return new class extends Migration {
   {
     Schema::create('pemindahan_saldos', function (Blueprint $table) {
       $table->id();
-      $table->string('tanggal'); // Menggunakan tipe data date
+      $table->date('tanggal'); // Menggunakan tipe data date
       $table->integer('transaksi_id'); // Menggunakan unsignedBigInteger
       $table->unsignedBigInteger('rekening_awal_id'); // Menggunakan unsignedBigInteger
       $table->unsignedBigInteger('rekening_tujuan_id'); // Menggunakan unsignedBigInteger
+      $table->unsignedBigInteger('user_id');
       $table->integer('saldo')->default(0);
       $table->timestamps();
 
@@ -31,6 +32,10 @@ return new class extends Migration {
         ->on('rekenings')
         ->onDelete('cascade')
         ->onUpdate('cascade'); // Menambahkan onUpdate cascade
+      $table->foreign('user_id')
+        ->references('id')
+        ->on('users')
+        ->onDelete('cascade');
     });
 
   }

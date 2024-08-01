@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Model\Rekening;
 use Illuminate\Http\Request;
 use App\Model\PemindahanSaldo;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PemindahanSaldoController extends Controller
@@ -19,9 +21,15 @@ class PemindahanSaldoController extends Controller
   public function store(Request $request)
   {
     $data = $request->all();
+    $userLogin = Auth::user();
+    $data['user_id'] = $userLogin->id;
 
     if (isset($data['saldo'])) {
       $data['saldo'] = preg_replace('/[^0-9]/', '', $data['saldo']);
+    }
+    // Konversi format tanggal
+    if (isset($data['tanggal'])) {
+      $data['tanggal'] = Carbon::createFromFormat('m/d/Y', $data['tanggal'])->format('Y-m-d');
     }
 
     $rekening_awal = Rekening::findOrFail($data['rekening_awal_id']);

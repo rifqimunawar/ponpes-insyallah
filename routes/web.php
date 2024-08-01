@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthenController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,13 +135,17 @@ Route::get('/extra/settings-page', 'MainController@extraSettingsPage')->name('ex
 
 Route::get('/login/v1', 'MainController@loginV1')->name('login-v1');
 Route::get('/login/v2', 'MainController@loginV2')->name('login-v2');
-Route::get('/login', 'MainController@loginV3')->name('login');
-Route::get('/register/v3', 'MainController@registerV3')->name('register-v3');
 
 Route::get('/helper/css', 'MainController@helperCSS')->name('helper-css');
 
 
 
+// ============================================================================= AUTH
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register/store', [LoginController::class, 'register'])->name('register.store');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // ============================================================================= TRANSAKSI
 Route::get('/dashboard', 'StatistikController@dashboard')->name('dashboard');
 Route::get('/index', 'StatistikController@index')->name('index');
