@@ -23,9 +23,10 @@ class Pemasukan extends Model
   {
     return $this->belongsTo(User::class);
   }
-  public static function getPemasukanHarianMingguIni($start_of_week, $end_of_week)
+  public static function getPemasukanHarianMingguIni($userId, $start_of_week, $end_of_week)
   {
     return self::select(DB::raw('DATE(tanggal) as date'), DB::raw('sum(saldo) as total'))
+      ->where('user_id', $userId)
       ->whereBetween('tanggal', [$start_of_week, $end_of_week])
       ->groupBy(DB::raw('DATE(tanggal)'))
       ->get();

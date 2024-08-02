@@ -11,7 +11,8 @@ class KebutuhanController extends Controller
 {
   public function index()
   {
-    $data = Kebutuhan::with('pengeluarans')->get();
+    $userLogin = Auth::user()->id;
+    $data = Kebutuhan::where('user_id', $userLogin)->with('pengeluarans')->get();
 
     foreach ($data as $kebutuhan) {
       $kebutuhan->total_pengeluaran = $kebutuhan->pengeluarans->sum('saldo');

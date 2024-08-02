@@ -11,8 +11,8 @@ class KegiatanController extends Controller
 {
   public function index()
   {
-    $data = Kegiatan::with('pengeluarans')->get();
-
+    $userLogin = Auth::user()->id;
+    $data = Kegiatan::where('user_id', $userLogin)->with('pengeluarans')->get();
     // Tambahkan total pengeluaran ke setiap kegiatan
     foreach ($data as $kegiatan) {
       $kegiatan->total_pengeluaran = $kegiatan->pengeluarans->sum('saldo');

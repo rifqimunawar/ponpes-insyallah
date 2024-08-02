@@ -12,7 +12,8 @@ class SumberPemasukanController extends Controller
   public function index()
   {
     $userLogin = Auth::user();
-    $data = SumberPemasukan::with('pemasukan')->get();
+    $data = SumberPemasukan::where('user_id', $userLogin)->with('pemasukan')->get();
+
 
     foreach ($data as $sumber_pemasukan) {
       $sumber_pemasukan->total_pemasukan = $sumber_pemasukan->pemasukan->sum('saldo');

@@ -33,9 +33,10 @@ class Pengeluaran extends Model
     return $this->belongsTo(User::class);
   }
 
-  public static function getPengeluaranHarianMingguIni($start_of_week, $end_of_week)
+  public static function getPengeluaranHarianMingguIni($userId, $start_of_week, $end_of_week)
   {
     return self::select(DB::raw('DATE(tanggal) as date'), DB::raw('SUM(saldo) as total'))
+      ->where('user_id', $userId)
       ->whereBetween('tanggal', [$start_of_week, $end_of_week])
       ->groupBy(DB::raw('DATE(tanggal)'))
       ->get();
