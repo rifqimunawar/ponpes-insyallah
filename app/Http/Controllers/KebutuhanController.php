@@ -9,9 +9,20 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class KebutuhanController extends Controller
 {
+  protected $userLogin;
+
+  public function __construct()
+  {
+
+    $this->middleware(function ($request, $next) {
+      $this->userLogin = Auth::user();
+      return $next($request);
+    });
+  }
+
   public function index()
   {
-    $userLogin = Auth::user()->id;
+    $userLogin = $this->userLogin;
     $data = Kebutuhan::where('user_id', $userLogin)->with('pengeluarans')->get();
 
     foreach ($data as $kebutuhan) {
@@ -21,18 +32,18 @@ class KebutuhanController extends Controller
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
-    return view('pages.master.kebutuhan.index', ['data' => $data]);
+    return view('pages.master.kebutuhan.index', ['data' => $data, 'userLogin' => $this->userLogin]);
   }
 
   public function create()
   {
-    return view('pages.master.kebutuhan.create');
+    return view('pages.master.kebutuhan.create', ['userLogin' => $this->userLogin]);
   }
 
   public function store(Request $request)
   {
     $data = $request->all();
-    $userLogin = Auth::user();
+    $userLogin = $this->userLogin;
     $data['user_id'] = $userLogin->id;
     $newData = Kebutuhan::create($data);
 
@@ -49,13 +60,13 @@ class KebutuhanController extends Controller
   public function edit($id)
   {
     $data = Kebutuhan::findOrFail($id);
-    return view('pages.master.kebutuhan.edit', ['data' => $data]);
+    return view('pages.master.kebutuhan.edit', ['data' => $data, 'userLogin' => $this->userLogin]);
   }
 
   public function update(Request $request, $id)
   {
     $data = $request->all();
-    $userLogin = Auth::user();
+    $userLogin = $this->userLogin;
     $data['user_id'] = $userLogin->id;
     $updateData = Kebutuhan::findOrFail($id);
     $updateData->update($data);

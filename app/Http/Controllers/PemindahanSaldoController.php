@@ -11,18 +11,28 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PemindahanSaldoController extends Controller
 {
+  protected $userLogin;
+
+  public function __construct()
+  {
+
+    $this->middleware(function ($request, $next) {
+      $this->userLogin = Auth::user();
+      return $next($request);
+    });
+  }
   public function create()
   {
     $title = "Pemindahan Saldo";
-    $userLogin = Auth::user()->id;
+    $userLogin = $this->userLogin;
     $rekening = Rekening::where('user_id', $userLogin)->get();
-    return view('pages.pemindahan-saldo.create', ['rekening' => $rekening, 'title' => $title]);
+    return view('pages.pemindahan-saldo.create', ['rekening' => $rekening, 'title' => $title, 'userLogin' => $this->userLogin]);
   }
 
   public function store(Request $request)
   {
     $data = $request->all();
-    $userLogin = Auth::user();
+    $userLogin = $this->userLogin;
     $data['user_id'] = $userLogin->id;
 
     if (isset($data['saldo'])) {

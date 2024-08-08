@@ -21,15 +21,15 @@ class PemasukansTableSeeder extends Seeder
         \DB::table('pemasukans')->insert(array (
             0 => 
             array (
-                'id' => 9,
-                'tanggal' => '2024-08-01',
-                'saldo' => 2300000,
-                'rekening_id' => 3,
+                'id' => 8,
+                'tanggal' => '2024-07-28',
+                'saldo' => 10000,
+                'rekening_id' => 5,
                 'transaksi_id' => 2,
-                'sumber_pemasukan_id' => 1,
+                'sumber_pemasukan_id' => 3,
                 'user_id' => 1,
-                'created_at' => '2024-08-02 08:28:40',
-                'updated_at' => '2024-08-02 08:28:40',
+                'created_at' => '2024-07-28 17:12:07',
+                'updated_at' => '2024-07-28 17:12:07',
             ),
         ));
         

@@ -67,18 +67,6 @@ class PemindahanSaldosTableSeeder extends Seeder
                 'created_at' => '2024-07-28 15:39:08',
                 'updated_at' => '2024-07-28 15:39:08',
             ),
-            4 => 
-            array (
-                'id' => 5,
-                'tanggal' => '2024-08-02',
-                'transaksi_id' => 3,
-                'rekening_awal_id' => 3,
-                'rekening_tujuan_id' => 5,
-                'user_id' => 1,
-                'saldo' => 200000,
-                'created_at' => '2024-08-02 08:29:16',
-                'updated_at' => '2024-08-02 08:29:16',
-            ),
         ));
         
         

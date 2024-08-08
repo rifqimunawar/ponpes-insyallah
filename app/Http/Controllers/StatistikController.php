@@ -36,35 +36,35 @@ class StatistikController extends Controller
     $target_pengeluaran_harian = $sisa_saldo / $jumlah_hari_tersisa;
 
     // Menghitung total pengeluaran bulan ini
-    $total_pengeluaran_bulan_ini = Pengeluaran::where('user_id', $userLogin)->whereMonth('tanggal', date('m'))
+    $total_pengeluaran_bulan_ini = Pengeluaran::where('user_id', $userLogin->id)->whereMonth('tanggal', date('m'))
       ->whereYear('tanggal', date('Y'))
       ->sum('saldo');
 
     // Menghitung total pengeluaran minggu ini
     $start_of_week = Carbon::now()->startOfWeek()->format('Y-m-d');
     $end_of_week = Carbon::now()->endOfWeek()->format('Y-m-d');
-    $total_pengeluaran_minggu_ini = Pengeluaran::where('user_id', $userLogin)->whereBetween('tanggal', [$start_of_week, $end_of_week])
+    $total_pengeluaran_minggu_ini = Pengeluaran::where('user_id', $userLogin->id)->whereBetween('tanggal', [$start_of_week, $end_of_week])
       ->sum('saldo');
 
     // Menghitung total pengeluaran tahun ini
-    $total_pengeluaran_tahun_ini = Pengeluaran::where('user_id', $userLogin)->whereYear('tanggal', date('Y'))
+    $total_pengeluaran_tahun_ini = Pengeluaran::where('user_id', $userLogin->id)->whereYear('tanggal', date('Y'))
       ->sum('saldo');
 
     // Menghitung total pemasukan bulan ini
-    $total_pemasukan_bulan_ini = Pemasukan::where('user_id', $userLogin)->whereMonth('tanggal', date('m'))
+    $total_pemasukan_bulan_ini = Pemasukan::where('user_id', $userLogin->id)->whereMonth('tanggal', date('m'))
       ->whereYear('tanggal', date('Y'))
       ->sum('saldo');
 
     // Menghitung total pemasukan minggu ini
-    $total_pemasukan_minggu_ini = Pemasukan::where('user_id', $userLogin)->whereBetween('tanggal', [$start_of_week, $end_of_week])
+    $total_pemasukan_minggu_ini = Pemasukan::where('user_id', $userLogin->id)->whereBetween('tanggal', [$start_of_week, $end_of_week])
       ->sum('saldo');
 
     // Menghitung total pemasukan tahun ini
-    $total_pemasukan_tahun_ini = Pemasukan::where('user_id', $userLogin)->whereYear('tanggal', date('Y'))
+    $total_pemasukan_tahun_ini = Pemasukan::where('user_id', $userLogin->id)->whereYear('tanggal', date('Y'))
       ->sum('saldo');
 
     // Menghitung pengeluaran hari ini
-    $pengeluaran_hari_ini = Pengeluaran::where('user_id', $userLogin)->whereDate('tanggal', Carbon::now()->format('Y-m-d'))
+    $pengeluaran_hari_ini = Pengeluaran::where('user_id', $userLogin->id)->whereDate('tanggal', Carbon::now()->format('Y-m-d'))
       ->sum('saldo');
 
     $pengeluaran_harian_minggu_ini = Pengeluaran::getPengeluaranHarianMingguIni($userId, $start_of_week, $end_of_week);
@@ -74,7 +74,7 @@ class StatistikController extends Controller
     $total_pemasukan_seminggu = $pemasukan_harian_minggu_ini->sum('saldo');
 
 
-    // dd($pengeluaran_harian_minggu_ini);
+    // dd($total_pengeluaran_bulan_ini);
     return view('pages.dashboard', [
       'userLogin' => $userLogin,
       'sisa_saldo' => $sisa_saldo,

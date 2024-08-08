@@ -150,6 +150,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/dashboard', 'StatistikController@dashboard')->name('dashboard');
 Route::get('/index', 'StatistikController@index')->name('index');
 
+Route::get('/profile/{id}', 'ProfileController@edit')->name('profile.edit');
+
 Route::get('/pengeluaran', 'PengeluaranController@index')->name('pengeluaran.index');
 Route::get('/pengeluaran/create', 'PengeluaranController@create')->name('pengeluaran.create');
 Route::post('/pengeluaran', 'PengeluaranController@store')->name('pengeluaran.store');

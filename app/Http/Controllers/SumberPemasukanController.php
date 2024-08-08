@@ -9,10 +9,20 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class SumberPemasukanController extends Controller
 {
+  protected $userLogin;
+
+  public function __construct()
+  {
+
+    $this->middleware(function ($request, $next) {
+      $this->userLogin = Auth::user();
+      return $next($request);
+    });
+  }
   public function index()
   {
-    $userLogin = Auth::user();
-    $data = SumberPemasukan::where('user_id', $userLogin)->with('pemasukan')->get();
+    $userLogin = $this->userLogin;
+    $data = SumberPemasukan::where('user_id', $userLogin->id)->with('pemasukan')->get();
 
 
     foreach ($data as $sumber_pemasukan) {
@@ -23,17 +33,17 @@ class SumberPemasukanController extends Controller
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
     // dd($userLogin);
-    return view('pages.master.sumber-pemasukan.index', ['data' => $data]);
+    return view('pages.master.sumber-pemasukan.index', ['data' => $data, 'userLogin' => $this->userLogin]);
   }
 
   public function create()
   {
-    return view('pages.master.sumber-pemasukan.create');
+    return view('pages.master.sumber-pemasukan.create', ['userLogin' => $this->userLogin]);
   }
   public function store(Request $request)
   {
     $data = $request->all();
-    $userLogin = Auth::user();
+    $userLogin = $this->userLogin;
     $data['user_id'] = $userLogin->id;
     $sumber_pemasukan = SumberPemasukan::create($data);
 
@@ -50,13 +60,13 @@ class SumberPemasukanController extends Controller
   public function edit($id)
   {
     $data = SumberPemasukan::findOrFail($id);
-    return view('pages.master.sumber-pemasukan.edit', ['data' => $data]);
+    return view('pages.master.sumber-pemasukan.edit', ['data' => $data, 'userLogin' => $this->userLogin]);
   }
 
   public function update(Request $request, $id)
   {
     $data = $request->all();
-    $userLogin = Auth::user();
+    $userLogin = $this->userLogin;
     $data['user_id'] = $userLogin->id;
     $sumber_pemasukan = SumberPemasukan::findOrFail($id);
     $sumber_pemasukan->update($data);

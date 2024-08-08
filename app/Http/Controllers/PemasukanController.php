@@ -14,28 +14,38 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PemasukanController extends Controller
 {
+  protected $userLogin;
+
+  public function __construct()
+  {
+
+    $this->middleware(function ($request, $next) {
+      $this->userLogin = Auth::user();
+      return $next($request);
+    });
+  }
   public function index()
   {
-    $userLogin = Auth::user()->id;
+    $userLogin = $this->userLogin;
     $pemasukan = Pemasukan::where('user_id', $userLogin)->with('sumber_pemasukan', 'rekening')->get();
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);
-    return view('pages.pemasukan.index', ['data' => $pemasukan]);
+    return view('pages.pemasukan.index', ['data' => $pemasukan, 'userLogin' => $this->userLogin]);
   }
 
   public function create()
   {
-    $userLogin = Auth::user()->id;
+    $userLogin = $this->userLogin;
     $rekening = Rekening::where('user_id', $userLogin)->get();
     $sumber = SumberPemasukan::where('user_id', $userLogin)->get();
-    return view('pages.pemasukan.create', ['sumber' => $sumber, 'rekening' => $rekening]);
+    return view('pages.pemasukan.create', ['sumber' => $sumber, 'rekening' => $rekening, 'userLogin' => $this->userLogin]);
   }
 
   public function store(Request $request)
   {
     $data = $request->all();
-    $userLogin = Auth::user();
+    $userLogin = $this->userLogin;
     $data['user_id'] = $userLogin->id;
     if (isset($data['saldo'])) {
       $data['saldo'] = preg_replace('/[^0-9]/', '', $data['saldo']);
@@ -64,17 +74,17 @@ class PemasukanController extends Controller
 
   public function edit($id)
   {
-    $userLogin = Auth::user()->id;
+    $userLogin = $this->userLogin;
     $rekening = Rekening::where('user_id', $userLogin)->get();
     $sumber = SumberPemasukan::where('user_id', $userLogin)->get();
     $data = Pemasukan::findOrFail($id);
-    return view('pages.pemasukan.edit', ['data' => $data, 'rekening' => $rekening, 'sumber' => $sumber]);
+    return view('pages.pemasukan.edit', ['data' => $data, 'rekening' => $rekening, 'sumber' => $sumber, 'userLogin' => $this->userLogin]);
   }
 
   public function update(Request $request, $id)
   {
     $data = $request->all();
-    $userLogin = Auth::user();
+    $userLogin = $this->userLogin;
     $data['user_id'] = $userLogin->id;
     $pemasukan = Pemasukan::findOrFail($id);
 
