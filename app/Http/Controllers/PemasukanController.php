@@ -38,7 +38,7 @@ class PemasukanController extends Controller
   {
     $userLogin = $this->userLogin;
     $rekening = Rekening::where('user_id', $userLogin->id)->get();
-    $sumber = SumberPemasukan::where('user_id', $userLogin)->get();
+    $sumber = SumberPemasukan::where('user_id', $userLogin->id)->get();
     return view('pages.pemasukan.create', ['sumber' => $sumber, 'rekening' => $rekening, 'userLogin' => $this->userLogin]);
   }
 
