@@ -15,5 +15,12 @@ use Modules\Galery\App\Http\Controllers\GaleryController;
 */
 
 Route::group([], function () {
-    Route::resource('galery', GaleryController::class)->names('galery');
+  Route::resource('galery', GaleryController::class)->names('galery');
 });
+
+Route::get('/galery', 'GaleryController@index')->name('galery.index');
+Route::get('/galery/create', 'GaleryController@create')->name('galery.create');
+Route::post('/galery', 'GaleryController@store')->name('galery.store');
+Route::get('/galery/{id}/edit', 'GaleryController@edit')->name('galery.edit');
+Route::post('/galery/{id}/update', 'GaleryController@update')->name('galery.update');
+Route::delete('/galery/{id}', 'GaleryController@destroy')->name('galery.destroy');

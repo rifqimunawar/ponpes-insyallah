@@ -97,6 +97,32 @@ class PengeluaransTableSeeder extends Seeder
                 'created_at' => '2024-08-07 16:04:16',
                 'updated_at' => '2024-08-07 16:04:16',
             ),
+            6 => 
+            array (
+                'id' => 8,
+                'tanggal' => '2024-08-08',
+                'saldo' => 20000,
+                'rekening_id' => 5,
+                'transaksi_id' => 1,
+                'kegiatan_id' => 1,
+                'kebutuhan_id' => 1,
+                'user_id' => 1,
+                'created_at' => '2024-08-08 13:07:22',
+                'updated_at' => '2024-08-08 13:07:22',
+            ),
+            7 => 
+            array (
+                'id' => 9,
+                'tanggal' => '2024-08-14',
+                'saldo' => 15000,
+                'rekening_id' => 5,
+                'transaksi_id' => 1,
+                'kegiatan_id' => 1,
+                'kebutuhan_id' => 2,
+                'user_id' => 1,
+                'created_at' => '2024-08-14 14:04:59',
+                'updated_at' => '2024-08-14 14:04:59',
+            ),
         ));
         
         

@@ -23,12 +23,13 @@ class KebutuhanController extends Controller
   public function index()
   {
     $userLogin = $this->userLogin;
-    $data = Kebutuhan::where('user_id', $userLogin)->with('pengeluarans')->get();
+    $data = Kebutuhan::where('user_id', $userLogin->id)->with('pengeluarans')->get();
 
     foreach ($data as $kebutuhan) {
       $kebutuhan->total_pengeluaran = $kebutuhan->pengeluarans->sum('saldo');
     }
 
+    // dd($userLogin);
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);

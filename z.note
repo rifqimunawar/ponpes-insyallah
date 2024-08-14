@@ -1,38 +1,10 @@
-master data:
-  jenis rekening -saldo, nama,
-  jenis transaksi -nama
-  jenis kegiatan -name 
 
-jenis rekening:
-  BRI
-  Uang Cash
-  Dana
+#cara membuat module
+php artisan module:make posts
 
-jenis transaksi:
-  pemindahan Dana
-  transaksi pengeluaran
-  transaksi pemasukan
+#####fitur hutan piutang
 
-jenis kegiatan:
-  kerja
-  mudik
-  healing
-  weekend
-  Belanja Bulanan
-  Pendidikan
+->(bg merah jka belum lunas dan jatuh tempo, kuning jika belum lunas, hijau jika sudah lunas ) optional
+hutang->table hutang (struk, nama, nominal, nominal terbayar berapa, status lunas, tangal, tgl jatuh tempo event(det, edit, del))
 
-
-  jenis pengeluaran:
-    Makan/Minum
-    Transportasi/Bensin
-    Kopi/Rokok
-
-  jenis pemasukan:
-    gaji pokok
-
-    transaksi pengeluaran
-      in tanggal transaksi
-      in jenis rekening
-      in jenis kegiatan
-      in pengeluaran rp
-      in keterangan
+event-> detail, lakukan penagihan,

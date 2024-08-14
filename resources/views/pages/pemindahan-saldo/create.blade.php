@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Form Plugins')
+@section('title', 'pemindahan-saldo')
 
 @push('css')
     <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
@@ -45,7 +45,7 @@
     </ol>
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Form {{ $title }} <small>header small text goes here...</small></h1>
+    <h1 class="page-header">Form Pemindahan Saldo <small>{{ $userLogin->name }}</small></h1>
     <!-- END page-header -->
     <!-- BEGIN row -->
     <div class="row">
@@ -92,7 +92,8 @@
                                     <option selected disabled> -- pilih -- </option>
                                     @foreach ($rekening as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }} :
-                                            ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})</option>
+                                            ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})
+                                        </option>
                                     @endforeach
 
                                 </select>
@@ -106,7 +107,8 @@
                                     <option selected disabled> -- pilih -- </option>
                                     @foreach ($rekening as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }} :
-                                            ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})</option>
+                                            ({{ 'Rp ' . number_format($item->saldo, 0, ',', '.') }})
+                                        </option>
                                     @endforeach
 
                                 </select>

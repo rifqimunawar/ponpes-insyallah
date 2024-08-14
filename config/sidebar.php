@@ -12,6 +12,9 @@ return [
   | the usual Laravel view path has already been registered for you.
   |
   */
+
+  // link untuk memilih icon 
+  //  https://seantheme.com/color-admin/admin/html/ui_icon_simple_line_icons.html
   'menu' =>
 
     [
@@ -42,13 +45,30 @@ return [
             'title' => 'Pemasukan',
             'route-name' => 'pemasukan.index'
           ]
-
-
         ]
       ],
+      // [
+      //   'icon' => 'icon-share',
+      //   'title' => 'Hutang/Piutang',
+      //   'url' => 'javascript:;',
+      //   'caret' => true,
+      //   'sub_menu' => [
+      //     [
+      //       'url' => '/hutang',
+      //       'title' => 'Hutang',
+      //       'route-name' => 'hutang.index'
+      //     ],
+      //     [
+      //       'url' => '/piutang',
+      //       'title' => 'Piutang',
+      //       'route-name' => 'piutang.index'
+      //     ]
+      //   ]
+      // ],
       [
         'icon' => 'icon-equalizer',
         'title' => 'Master',
+        'caret' => true,
         'url' => 'javascript:;',
         'sub_menu' => [
           [
@@ -72,6 +92,12 @@ return [
             'route-name' => 'kebutuhan.index'
           ]
         ]
+      ],
+      [
+        'icon' => 'icon-picture',
+        'title' => 'Galery',
+        'url' => '/galery',
+        'route-name' => 'galery'
       ],
 
     ]

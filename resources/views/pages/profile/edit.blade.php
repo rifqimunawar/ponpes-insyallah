@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Profile - Extension Combination')
+@section('title', 'Profile')
 
 @push('css')
     <link href="{{ asset('/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
@@ -73,7 +73,7 @@
             <!-- END profile-header-content -->
             <!-- BEGIN profile-header-tab -->
             <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item"><a href="#profile-about" class="nav-link active" data-bs-toggle="tab">ABOUT</a></li>
+                <li class="nav-item"><a href="#profile-avatar" class="nav-link active" data-bs-toggle="tab">PROFILE</a></li>
                 <li class="nav-item"><a href="#profile-photos" class="nav-link" data-bs-toggle="tab">PHOTOS</a></li>
             </ul>
             <!-- END profile-header-tab -->
@@ -84,11 +84,59 @@
     <div class="profile-content">
         <!-- BEGIN tab-content -->
         <div class="tab-content p-0">
-            <!-- BEGIN #profile-post tab -->
+            <!-- PROFILE Avatar Tab -->
+            <div class="container col-md-6 tab-pane fade show active" id="profile-avatar">
+                <div class="mb-5">
+                    <form action="{{ route('profile.foto') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <label for="Image" class="form-label">Upload foto profile baru</label>
+                        <input class="form-control" required type="file" name="avatar" id="formFile"
+                            onchange="preview()">
+                        <button type="button" onclick="clearImage()" class="btn btn-warning mt-3">Hapus</button>
+                        <button type="submit" class="btn btn-info mt-3">Simpan</button>
+                    </form>
+                </div>
+                <img id="frameProfile" src="" class="img-fluid" />
+            </div>
 
-            <!-- END #profile-friends tab -->
+            <!-- PROFILE Photos Tab -->
+            <div class="container col-md-6 tab-pane fade" id="profile-photos">
+                <div class="mb-5">
+                    <form action="{{ route('galery.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <label for="ImageGalery" class="form-label">Upload foto untuk galery</label>
+                        <input class="form-control" required type="file" name="img" id="formFileGalery"
+                            onchange="previewGalery()">
+                        <button type="button" onclick="clearImageGalery()" class="btn btn-warning mt-3">Hapus</button>
+                        <button type="submit" class="btn btn-info mt-3">Simpan</button>
+                    </form>
+                </div>
+                <img id="frameGalery" src="" class="img-fluid" />
+            </div>
         </div>
-        <!-- END tab-content -->
-    </div>
-    <!-- END profile-content -->
-@endsection
+        <!-- END profile-content -->
+    @endsection
+    <script>
+        function preview() {
+            const frame = document.getElementById('frameProfile');
+            frame.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        function clearImage() {
+            document.getElementById('formFile').value = null;
+            const frame = document.getElementById('frameProfile');
+            frame.src = "";
+        }
+
+        // ==========================================for galery
+        function previewGalery() {
+            const frame = document.getElementById('frameGalery');
+            frame.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        function clearImageGalery() {
+            document.getElementById('formFileGalery').value = null;
+            const frame = document.getElementById('frameGalery');
+            frame.src = "";
+        }
+    </script>

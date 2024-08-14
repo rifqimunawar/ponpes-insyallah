@@ -1,4 +1,6 @@
 {
     "Galery": true,
-    "ContohModule": true
+    "ContohModule": true,
+    "Hutang": true,
+    "Piutang": true
 }

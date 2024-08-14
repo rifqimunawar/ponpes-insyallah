@@ -20,7 +20,7 @@
                     muted></video>
             </div>
             <div class="news-caption">
-                <h4 class="caption-title"><b>Rifqi</b> Munawar App</h4>
+                <h4 class="caption-title"><b>gridbox</b>App</h4>
                 <p>
                     Download the this app for iPhone®, iPad®, and Android™. Lorem ipsum dolor sit amet, consectetur
                     adipiscing elit.
@@ -37,7 +37,7 @@
                         <span class="logo"></span>
 
 
-                        <b>Rifqi</b> Munawar
+                        <b>gridbox</b>App
                     </div>
                     <small>Bootstrap 5 Responsive 2024</small>
                 </div>
@@ -93,7 +93,7 @@
                     </div>
                     <hr class="bg-gray-600 opacity-2" />
                     <div class="text-gray-600 text-center text-gray-500-darker mb-0">
-                        &copy; Color Admin All Right Reserved 2024
+                        &copy; gridboxApp All Right Reserved 2024
                     </div>
                 </form>
             </div>

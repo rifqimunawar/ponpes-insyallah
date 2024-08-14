@@ -41,7 +41,7 @@ class RekeningsTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'name' => 'BRI',
-                'saldo' => '2100000',
+                'saldo' => '0',
                 'user_id' => 1,
                 'created_at' => '2024-07-21 06:51:47',
                 'updated_at' => '2024-08-02 08:29:16',
@@ -50,10 +50,10 @@ class RekeningsTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'name' => 'Cash',
-                'saldo' => '40000',
+                'saldo' => '0',
                 'user_id' => 1,
                 'created_at' => '2024-07-21 06:51:59',
-                'updated_at' => '2024-08-07 16:04:16',
+                'updated_at' => '2024-08-14 14:04:59',
             ),
             4 => 
             array (

@@ -6,6 +6,7 @@ use App\Model\Rekening;
 use App\Model\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Galery\App\Models\Galery;
 
 class User extends Authenticatable
 {
@@ -38,5 +39,9 @@ class User extends Authenticatable
   public function rekenings()
   {
     return $this->hasMany(Rekening::class);
+  }
+  public function galeries()
+  {
+    return $this->hasMany(Galery::class);
   }
 }

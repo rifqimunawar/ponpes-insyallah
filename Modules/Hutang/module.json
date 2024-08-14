@@ -1,0 +1,11 @@
+{
+    "name": "Hutang",
+    "alias": "hutang",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Hutang\\App\\Providers\\HutangServiceProvider"
+    ],
+    "files": []
+}

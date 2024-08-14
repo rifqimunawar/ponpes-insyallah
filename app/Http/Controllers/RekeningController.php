@@ -22,7 +22,7 @@ class RekeningController extends Controller
   public function index()
   {
     $userLogin = $this->userLogin;
-    $data = Rekening::where('user_id', $userLogin)->get();
+    $data = Rekening::where('user_id', $userLogin->id)->get();
     $title = 'Delete Data!';
     $text = "Are you sure you want to delete?";
     confirmDelete($title, $text);

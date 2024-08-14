@@ -151,6 +151,8 @@ Route::get('/dashboard', 'StatistikController@dashboard')->name('dashboard');
 Route::get('/index', 'StatistikController@index')->name('index');
 
 Route::get('/profile/{id}', 'ProfileController@edit')->name('profile.edit');
+Route::post('/upload/profile', 'ProfileController@foto')->name('profile.foto');
+Route::post('/upload/galery', 'ProfileController@galery')->name('profile.galery');
 
 Route::get('/pengeluaran', 'PengeluaranController@index')->name('pengeluaran.index');
 Route::get('/pengeluaran/create', 'PengeluaranController@create')->name('pengeluaran.create');

@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Managed Tables - Extension Combination')
+@section('title', 'master')
 
 @push('css')
     <link href="{{ asset('/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
@@ -58,7 +58,7 @@
     </ol>
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Managed Tables - Extension Combination <small>header small text goes here...</small></h1>
+    <h1 class="page-header">Form Kebutuhan <small>{{ $userLogin->name }}</small></h1>
     <!-- END page-header -->
     <!-- BEGIN row -->
     <div class="row">
@@ -67,7 +67,7 @@
             <div class="panel panel-inverse">
                 <!-- BEGIN panel-heading -->
                 <div class="panel-heading">
-                    <h4 class="panel-title">DataTable - Extension Combination</h4>
+                    <h4 class="panel-title">DataTable - Kebutuhan</h4>
                     <div class="panel-heading-btn">
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i
                                 class="fa fa-expand"></i></a>
@@ -99,7 +99,7 @@
                             @foreach ($data as $item)
                                 <tr class="even gradeC">
                                     <td width="1%" class="fw-bold">{{ $loop->iteration }}</td>
-                                    <td width="1%"><img src="/assets/img/user/user-2.jpg"
+                                    <td width="1%"><img src="{{ asset('/assets/img/user/' . $userLogin->avatar) }}"
                                             class="rounded h-30px my-n1 mx-n1" /></td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ 'Rp ' . number_format($item->total_pengeluaran, 0, ',', '.') }}<d>

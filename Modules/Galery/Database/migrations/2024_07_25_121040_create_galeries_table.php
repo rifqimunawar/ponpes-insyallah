@@ -12,9 +12,12 @@ return new class extends Migration {
   {
     Schema::create('galeries', function (Blueprint $table) {
       $table->id();
-      $table->string('judul');
+      $table->unsignedBigInteger('user_id');
       $table->string('img');
+      $table->string('img_thumbnail');
       $table->timestamps();
+
+      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
     });
   }
 

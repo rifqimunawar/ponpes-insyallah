@@ -13,12 +13,12 @@
                         data-target="#appSidebarProfileMenu">
                         <div class="menu-profile-cover with-shadow"></div>
                         <div class="menu-profile-image">
-                            <img src="{{ asset('/assets/img/user/user-13.jpg') }}" alt="" />
+                            <img src="{{ asset('/assets/img/user/' . $userLogin->avatar) }}" alt="" />
                         </div>
                         <div class="menu-profile-info">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
-                                    Rifqi Munawar
+                                    {{ $userLogin->name }}
                                 </div>
                                 <div class="menu-caret ms-auto"></div>
                             </div>

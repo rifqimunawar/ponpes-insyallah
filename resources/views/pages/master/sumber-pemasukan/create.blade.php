@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Form Plugins')
+@section('title', 'master')
 
 @push('css')
     <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
@@ -45,7 +45,7 @@
     </ol>
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Form Pengeluaran <small>header small text goes here...</small></h1>
+    <h1 class="page-header">Form Pemasukan <small>{{ $userLogin->name }}</small></h1>
     <!-- END page-header -->
     <!-- BEGIN row -->
     <div class="row">

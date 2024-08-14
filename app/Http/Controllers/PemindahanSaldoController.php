@@ -25,7 +25,7 @@ class PemindahanSaldoController extends Controller
   {
     $title = "Pemindahan Saldo";
     $userLogin = $this->userLogin;
-    $rekening = Rekening::where('user_id', $userLogin)->get();
+    $rekening = Rekening::where('user_id', $userLogin->id)->get();
     return view('pages.pemindahan-saldo.create', ['rekening' => $rekening, 'title' => $title, 'userLogin' => $this->userLogin]);
   }
 

@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Pemindahan Saldo - Extension Combination')
+@section('title', 'Pemindahan Saldo')
 
 @push('css')
     <link href="{{ asset('/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />

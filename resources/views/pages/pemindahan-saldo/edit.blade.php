@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Form Plugins')
+@section('title', 'pemindahan-saldo')
 
 @push('css')
     <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />

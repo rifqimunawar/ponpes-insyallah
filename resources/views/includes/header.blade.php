@@ -16,7 +16,7 @@
                 <span class="icon-bar"></span>
             </button>
         @endif
-        <a href="/" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> Admin</a>
+        <a href="/" class="navbar-brand"><span class="navbar-logo"></span> <b>gridbox</b>App</a>
         @if ($appHeaderMegaMenu && !$appSidebarTwo)
             <button type="button" class="navbar-mobile-toggler" data-bs-toggle="collapse" data-bs-target="#top-navbar">
                 <span class="fa-stack fa-lg">
@@ -75,9 +75,9 @@
 
         <div class="navbar-item navbar-user dropdown">
             <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                <img src="{{ asset('/assets/img/user/user-13.jpg') }}" alt="" />
-                <span>
-                    <span class="d-none d-md-inline">Rifqi Muna</span>
+                <img src="{{ asset('/assets/img/user/' . $userLogin->avatar) }}" alt="" />
+                <span class="mx-3">
+                    <span class="d-none d-md-inline">{{ $userLogin->name }}</span>
                     <b class="caret"></b>
                 </span>
             </a>

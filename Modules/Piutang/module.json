@@ -1,0 +1,11 @@
+{
+    "name": "Piutang",
+    "alias": "piutang",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Piutang\\App\\Providers\\PiutangServiceProvider"
+    ],
+    "files": []
+}
