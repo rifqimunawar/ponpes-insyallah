@@ -16,11 +16,6 @@ class Galery extends Model
    */
   protected $guarded = ([]);
 
-  protected static function newFactory() : GaleryFactory
-  {
-    //return GaleryFactory::new();
-  }
-
   public function users()
   {
     return $this->belongsTo(User::class);

@@ -92,13 +92,6 @@ class GaleryController extends Controller
     return view('galery::edit');
   }
 
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $request, $id) : RedirectResponse
-  {
-    //
-  }
 
   /**
    * Remove the specified resource from storage.

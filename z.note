@@ -5,6 +5,17 @@ php artisan module:make posts
 #####fitur hutan piutang
 
 ->(bg merah jka belum lunas dan jatuh tempo, kuning jika belum lunas, hijau jika sudah lunas ) optional
-hutang->table hutang (struk, nama, nominal, nominal terbayar berapa, status lunas, tangal, tgl jatuh tempo event(det, edit, del))
+hutang->table hutang (
+  event(det, edit, del))
 
 event-> detail, lakukan penagihan,
+
+  tanggal, 
+  nama, 
+  nominal, 
+  rekening
+  tgl jatuh tempo/rencana pembayaran
+  struk,
+
+  nominal terbayar berapa, default 0 
+  status lunas, 

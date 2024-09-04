@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('master-content')
 
-@section('title', 'Galery')
+@section('title', 'Hutang')
 
 @push('css')
     <link href="{{ asset('/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />

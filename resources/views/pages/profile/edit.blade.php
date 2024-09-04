@@ -74,7 +74,7 @@
             <!-- BEGIN profile-header-tab -->
             <ul class="profile-header-tab nav nav-tabs">
                 <li class="nav-item"><a href="#profile-avatar" class="nav-link active" data-bs-toggle="tab">PROFILE</a></li>
-                <li class="nav-item"><a href="#profile-photos" class="nav-link" data-bs-toggle="tab">PHOTOS</a></li>
+                <li class="nav-item"><a href="#profile-photos" class="nav-link" data-bs-toggle="tab">GALERY</a></li>
             </ul>
             <!-- END profile-header-tab -->
         </div>

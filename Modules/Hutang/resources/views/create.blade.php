@@ -1,7 +1,3 @@
-@extends('layouts.default')
-
-@section('title', 'pengeluaran')
-
 @push('css')
     <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     <link href="/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -29,13 +25,8 @@
     <script src="/assets/js/demo/form-plugins.demo.js"></script>
     <script src="/assets/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>
     <script src="/assets/js/demo/render.highlight.js"></script>
-
-    <!-- Pastikan Anda menyertakan jQuery dan jQuery UI jika menggunakan datepicker dari jQuery UI -->
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> --}}
 @endpush
-
+@extends('hutang::layouts.master')
 @section('content')
     <!-- BEGIN breadcrumb -->
     <ol class="breadcrumb float-xl-end">
@@ -45,7 +36,7 @@
     </ol>
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Form Pengeluaran <small>{{ $userLogin->name }}</small></h1>
+    <h1 class="page-header">Form Hutang <small>{{ $userLogin->name }}</small></h1>
     <!-- END page-header -->
     <!-- BEGIN row -->
     <div class="row">
@@ -70,7 +61,7 @@
                 <!-- END panel-heading -->
                 <!-- BEGIN panel-body -->
                 <div class="panel-body p-0">
-                    <form class="form-horizontal form-bordered" action="{{ route('pengeluaran.store') }}" method="post"
+                    <form class="form-horizontal form-bordered" action="{{ route('hutang.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
@@ -86,9 +77,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="form-label col-form-label col-lg-4">Rekening</label>
+                            <label class="form-label col-form-label col-lg-4">Nama</label>
                             <div class="col-lg-8">
-                                <select class="form-select" name="rekening_id" aria-label="Default select example" required>
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="nama...." required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="form-label col-form-label col-lg-4">Rp</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control uang" name="nominal" id="rupiah"
+                                    placeholder="Rp ....." required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="form-label col-form-label col-lg-4">Rekening Tujuan</label>
+                            <div class="col-lg-8">
+                                <select class="form-select" name="rekening_tujuan_id" aria-label="Default select example"
+                                    required>
                                     <option selected disabled> -- pilih -- </option>
                                     @foreach ($rekening as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }} :
@@ -99,43 +105,37 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label class="form-label col-form-label col-lg-4">Kegiatan</label>
-                            <div class="col-lg-8">
-                                <select class="form-select" name="kegiatan_id" aria-label="Default select example" required>
-                                    <option selected disabled> -- pilih -- </option>
-                                    @foreach ($kegiatan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
+                            <label class="form-label col-form-label col-lg-4">Tanggal Jatuh Tempo</label>
+                            <div class="col-lg-4">
+                                <div id="datepicker-inline">
+                                    <div>
+                                        <input required name="tanggal_jatuh_tempo" type="date" class="form-control"
+                                            id="datepicker-autoClose" required />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="form-label col-form-label col-lg-4">Kebutuhan</label>
-                            <div class="col-lg-8">
-                                <select class="form-select" name="kebutuhan_id" aria-label="Default select example"
-                                    required>
-                                    <option selected disabled> -- pilih -- </option>
-                                    @foreach ($kebutuhan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
+                            <label class="form-label col-form-label col-lg-4">Bukti transfer jika ada</label>
+                            <div class="col-lg-4">
+                                <div id="datepicker-inline">
+                                    <div>
+                                        <input class="form-control" required type="file" name="img_struk">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="form-label col-form-label col-lg-4">Rp</label>
-                            <div class="col-lg-8">
-                                <input type="text" class="form-control uang" name="saldo" id="rupiah"
-                                    placeholder="Rp ....." required>
-                            </div>
-                        </div>
+
                         <div class="text-center mt-4 mb-4">
                             <input type="hidden" name="transaksi_id" value="1">
-                            <a href="{{ route('pengeluaran.index') }}" class="btn btn-warning">Kembali</a>
+                            <a href="{{ route('hutang.index') }}" class="btn btn-warning">Kembali</a>
                             <button type="submit" class="btn btn-primary">simpan</button>
                         </div>
                     </form>
                 </div>
+                <img id="frameProfile" src="" class="img-fluid" />
             </div>
             <!-- END panel -->
         </div>
@@ -146,6 +146,28 @@
 
 <!-- script -->
 <script>
+    function preview() {
+        const frame = document.getElementById('frameProfile');
+        frame.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    function clearImage() {
+        document.getElementById('formFile').value = null;
+        const frame = document.getElementById('frameProfile');
+        frame.src = "";
+    }
+
+    // ==========================================for galery
+    function previewGalery() {
+        const frame = document.getElementById('frameGalery');
+        frame.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    function clearImageGalery() {
+        document.getElementById('formFileGalery').value = null;
+        const frame = document.getElementById('frameGalery');
+        frame.src = "";
+    }
     document.addEventListener('DOMContentLoaded', function() {
         var rupiah = document.getElementById('rupiah');
 

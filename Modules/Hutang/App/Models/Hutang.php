@@ -2,21 +2,18 @@
 
 namespace Modules\Hutang\App\Models;
 
+use App\Model\Rekening;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Hutang\Database\factories\HutangFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Hutang extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-    
-    protected static function newFactory(): HutangFactory
+    public function rekening()
     {
-        //return HutangFactory::new();
+      return $this->belongsTo(Rekening::class, 'rekening_tujuan_id');
     }
 }

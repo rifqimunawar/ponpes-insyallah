@@ -67,14 +67,16 @@ class StatistikController extends Controller
     $pengeluaran_hari_ini = Pengeluaran::where('user_id', $userLogin->id)->whereDate('tanggal', Carbon::now()->format('Y-m-d'))
       ->sum('saldo');
 
-    $pengeluaran_harian_minggu_ini = Pengeluaran::getPengeluaranHarianMingguIni($userId, $start_of_week, $end_of_week);
-    $pemasukan_harian_minggu_ini = Pemasukan::getPemasukanHarianMingguIni($userId, $start_of_week, $end_of_week);
+    // $pengeluaran_harian_minggu_ini = Pengeluaran::getPengeluaranHarianMingguIni($userId, $start_of_week, $end_of_week);
+    // $pemasukan_harian_minggu_ini = Pemasukan::getPemasukanHarianMingguIni($userId, $start_of_week, $end_of_week);
+    $pengeluaran_harian_minggu_ini = Pengeluaran::getPengeluaranHarian($userId);
+    $pemasukan_harian_minggu_ini = Pemasukan::getPemasukanHarian($userId);
 
     $total_pengeluaran_seminggu = $pengeluaran_harian_minggu_ini->sum('saldo');
     $total_pemasukan_seminggu = $pemasukan_harian_minggu_ini->sum('saldo');
 
 
-    // dd($total_pengeluaran_bulan_ini);
+    // dd($pengeluaran_harian_minggu_ini);
     return view('pages.dashboard', [
       'userLogin' => $userLogin,
       'sisa_saldo' => $sisa_saldo,

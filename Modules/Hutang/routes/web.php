@@ -19,6 +19,7 @@ use Modules\Hutang\App\Http\Controllers\HutangController;
 // });
 Route::get('/hutang', 'HutangController@index')->name('hutang.index');
 Route::get('/hutang/create', 'HutangController@create')->name('hutang.create');
+Route::get('/hutang/bayar', 'HutangController@bayar')->name('hutang.bayar');
 Route::post('/hutang', 'HutangController@store')->name('hutang.store');
 Route::get('/hutang/{id}/edit', 'HutangController@edit')->name('hutang.edit');
 Route::post('/hutang/{id}/update', 'HutangController@update')->name('hutang.update');

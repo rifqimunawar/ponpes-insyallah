@@ -31,4 +31,13 @@ class Pemasukan extends Model
       ->groupBy(DB::raw('DATE(tanggal)'))
       ->get();
   }
+
+  public static function getPemasukanHarian($userId)
+  {
+    return self::select(DB::raw('DATE(tanggal) as date'), DB::raw('SUM(saldo) as total'))
+      ->where('user_id', $userId)
+      ->groupBy(DB::raw('DATE(tanggal)'))
+      ->get();
+  }
+
 }
