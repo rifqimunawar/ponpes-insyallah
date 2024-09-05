@@ -208,10 +208,10 @@
                         name: 'Pengeluaran',
                         data: pengeluaranData
                     },
-                    {
-                        name: 'Pemasukan',
-                        data: pemasukanData
-                    }
+                    // {
+                    //     name: 'Pemasukan',
+                    //     data: pemasukanData
+                    // }
                 ],
                 xaxis: {
                     type: 'datetime',
